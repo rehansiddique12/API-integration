@@ -2,21 +2,11 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { toast } from "sonner";
 
-// import { type RootState } from "..";
-
 const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_BASE_API_URL as string,
   prepareHeaders: (headers) => {
     headers.set("Content-Type", "application/json");
   }
-  // prepareHeaders: (headers, { getState }) => {
-  //   const token = (getState() as RootState).global.token;
-  //   headers.set("Content-Type", "application/json");
-
-  //   if (token) {
-  //     headers.set("Authorization", `Bearer ${token}`);
-  //   }
-  // },
 });
 
 const baseQueryWith401Handling: typeof baseQuery = async (
@@ -40,7 +30,6 @@ export const api = createApi({
   keepUnusedDataFor: 5,
   tagTypes: [
    "Todo",
-   "Todos",
   ],
   endpoints: (build) => ({
     healthCheck: build.query({
@@ -51,4 +40,5 @@ export const api = createApi({
       transformResponse: (response: HealthCheck) => response,
     }),
   }),
+  // endpoints: () => ({}),
 });

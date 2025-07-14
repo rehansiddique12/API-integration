@@ -7,20 +7,44 @@ declare type HealthCheck = {
 
 declare type GlobalState = {
   token: string;
-  vapiId: string;
-  twilioNumber: string;
-  business: {
-    id: string;
-    name: string;
-    phone: string;
-    country: string;
-    industry: string;
-  };
+  userdata:{
+    id: number,
+    first_name: string,
+    last_name: string,
+    email: string,
+    profile_picture: string,
+  }
 };
 
 
-declare type Todo ={
+declare type Auth ={
   id: string;
-  title : string;
-  description: string;
+  first_name : string;
+  last_name : string;
+  email: string;
+  password: string;
 }
+
+
+
+declare type Userdata = {
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  profile_picture: string;
+}
+
+
+declare type PostLoginResponse = {
+  data: {
+    data: {
+      token: string;
+      id: number;
+      first_name: string;
+      last_name: string;
+      email: string;
+      profile_picture?: string;
+    };
+  };
+};

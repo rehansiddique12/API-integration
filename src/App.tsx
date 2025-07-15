@@ -1,8 +1,8 @@
-import {Navigate, Route, Routes } from "react-router-dom";
+import Dashbord from "./pages/dashbord";
 import Loginpage from "./pages/login-page";
 import SignupPage from "./pages/signup-page";
-import RouteGuard from "./copmponents/route-guard";
-import Dashbord from "./pages/dashbord";
+import RouteGuard from "./components/route-guard";
+import {Navigate, Route, Routes } from "react-router-dom";
 
 
 const App = () => {

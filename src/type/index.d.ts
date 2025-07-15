@@ -48,3 +48,13 @@ declare type PostLoginResponse = {
     };
   };
 };
+
+
+
+
+declare type Items = {
+  id: number;
+  name: string;
+  description: string;
+  image_url: string;
+}

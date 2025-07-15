@@ -1,21 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Toaster, toast } from "sonner";
 import { Link } from "react-router-dom";
 import { LuLoader } from "react-icons/lu";
 import { useNavigate } from "react-router";
 import { FaTelegramPlane } from "react-icons/fa";
-import ImageUploader from "../copmponents/image-uploder";
-import { useRegisterApiMutation } from "../store/services/user";
+import Imageuploder from "../components/image-uploder";
+import { useRegisterApiMutation } from "../store/services/auth";
+import { useDispatch } from "react-redux";
+import { setToken } from "../store/slices/global";
+import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
 
 const SignupPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [image, setImage] = useState("");
-  const [register, {isLoading}] = useRegisterApiMutation();
   const [password, setPassword] = useState("");
   const [lestname, setLestname] = useState("");
-  
+  const [register, { isLoading }] = useRegisterApiMutation();
 
   const handleSubmit = async () => {
     const payload = {
@@ -26,7 +30,6 @@ const SignupPage = () => {
       profile_picture: image,
     };
     const respon = await register(payload);
-    console.log(respon);
     if (respon.data.data) {
       toast.success(respon.data.message || "Signup successful!");
       void navigate("/");
@@ -38,98 +41,125 @@ const SignupPage = () => {
     setName("");
     setLestname("");
   };
+
+  useEffect(() => {
+    dispatch(setToken(null));
+    localStorage.clear();
+    // console.log("Token after remove:", localStorage.getItem("token"));
+  }, []);
+
   return (
-    <div className="bg-gradient-to-r from-[#1a5193] to-indigo-500 h-screen">
+    <div className="bg-black h-screen">
       <Toaster position="top-right" richColors />
-      <div className=" h-full flex flex-col items-center justify-center gap-5">
-        <p className="text-3xl font-bold text-white">REGISTER FORM</p>
-        <div className="w-1/2">
+      <div className=" h-full flex flex-col items-center justify-center">
+        <div className="w-[450px] flex items-center justify-center">
           <form
             onSubmit={(e) => {
               e.preventDefault();
               handleSubmit();
             }}
-            className="bg-white rounded-xl flex flex-col p-10 w-full border-l-8 border-indigo-600 duration-500 hover:shadow-xl"
+            className="bg-[#181818] rounded-xl flex flex-col px-5 py-2 w-full h-[750px] border-2 border-[#2b2b2b] gap-5"
           >
-            <div className="flex w-full gap-10">
-              <div className="flex flex-col w-full">
-                <label htmlFor="" className="mb-2 mt-3 font-bold text-xl">
-              First_Name:
-            </label>
-            <input
-              type="name"
-              placeholder="Enter Your First_Name"
-              className="bg-black/20 p-3 rounded-xl outline-none px-5 focus:border focus:border-indigo-600"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
+            <div>
+              <div>
+                <p className="text-xl font-bold text-white mt-4">REGISTER</p>
+                <p className="font-bold text-sm text-[#8d8d8d]">
+                  Enter your details to get started.
+                </p>
+                <Separator className="my-4" />
               </div>
-            <div className="flex flex-col w-full">
-              <label htmlFor="" className="mb-2 mt-3 font-bold text-xl">
-              Last_Name:
-            </label>
-            <input
-              type="name"
-              placeholder="Enter Your Last_Name"
-              className="bg-black/20 p-3 rounded-xl outline-none px-5 focus:border focus:border-indigo-600"
-              value={lestname}
-              onChange={(e) => setLestname(e.target.value)}
-              required
-            />
+              <div className="flex flex-col w-full text-sm">
+                <label htmlFor="" className="mb-2 font-bold text-[#e5e5e5]">
+                  First_Name:
+                </label>
+                <Input
+                  type="name"
+                  placeholder="Enter Your First_Name"
+                  className="bg-white/5"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="flex flex-col w-full text-sm">
+                <label
+                  htmlFor=""
+                  className="mb-2 mt-4 font-bold text-[#e5e5e5]"
+                >
+                  Last_Name:
+                </label>
+                <Input
+                  type="name"
+                  placeholder="Enter Your Last_Name"
+                  className="bg-white/5"
+                  value={lestname}
+                  onChange={(e) => setLestname(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className="flex flex-col w-full text-sm">
+                <label
+                  htmlFor=""
+                  className="mb-2 mt-4 font-bold text-[#e5e5e5]"
+                >
+                  Email:
+                </label>
+                <Input
+                  type="email"
+                  placeholder="exanple@gmail.com"
+                  className="bg-white/5"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="flex flex-col w-full text-sm">
+                <label
+                  htmlFor=""
+                  className="mb-2 mt-4 font-bold text-[#e5e5e5]"
+                >
+                  Password:
+                </label>
+                <Input
+                  type="password"
+                  placeholder="Enter Your Password"
+                  className="bg-white/5"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
             </div>
+            <div className="">
+              <Imageuploder image={image} setImage={setImage} />
+
+              <div className="flex justify-end gap-3 w-full mt-2">
+                <button
+                  disabled={isLoading}
+                  type="submit"
+                  className="flex items-center justify-center gap-2 bg-[#e5e5e5] px-8 py-2 w-full rounded-lg cursor-pointer font-bold mt-3"
+                >
+                  {isLoading ? (
+                    <LuLoader size={20} color="#000" className="animate-spin" />
+                  ) : (
+                    <div className="flex justify-center items-center gap-2">
+                      <FaTelegramPlane />
+                      Register
+                    </div>
+                  )}
+                </button>
+              </div>
+              <p className="text-center mt-4 text-[#e5e5e5] text-[12px]">
+                Already have an account?
+                <Link
+                  to={"/login"}
+                  className="underline underline-offset-4 text-[#e5e5e5] font-bold text-sm ml-1"
+                >
+                  Login
+                </Link>
+              </p>
             </div>
-            <label htmlFor="" className="mb-2 mt-3 font-bold text-xl">
-              Email:
-            </label>
-            <input
-              type="email"
-              placeholder="Enter Your Email"
-              className="bg-black/20 p-3 rounded-xl outline-none px-5 focus:border focus:border-indigo-600"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <label htmlFor="" className="mb-2 mt-3 font-bold text-xl">
-              Password:
-            </label>
-            <input
-              type="password"
-              placeholder="Enter Your Password"
-              className="bg-black/20 p-3 rounded-xl outline-none px-5 focus:border focus:border-indigo-600"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <div className="mt-3">
-              <ImageUploader image={image} setImage={setImage} />
-            </div>
-            <div className="flex justify-end gap-3 w-full mt-10">
-              <button
-              disabled={isLoading}
-                type="submit"
-                className="flex items-center justify-center gap-2 bg-gradient-to-r px-8 py-3 w-full rounded-lg cursor-pointer text-white font-bold from-[#1a5193] to-indigo-500"
-              >
-                 {isLoading ?
-                  <LuLoader size={20} color="#FFFFFF" className="animate-spin" />
-                  :
-                  <div className="flex justify-center items-center gap-2">
-                    <FaTelegramPlane />
-                    Register
-                  </div>
-                  }
-                
-              </button>
-            </div>
-            <p className="text-end mt-4 mr-r">
-              Already have an account?
-              <Link
-                to={"/login"}
-                className="underline underline-offset-4 text-indigo-500 font-bold text-lg ml-1"
-              >
-                Login
-              </Link>
-            </p>
           </form>
         </div>
       </div>
@@ -138,3 +168,7 @@ const SignupPage = () => {
 };
 
 export default SignupPage;
+
+
+
+

@@ -5,14 +5,14 @@ export const registerApi = api.injectEndpoints({
   endpoints: (build) => ({
     registerApi: build.mutation({
       query: (payload) => ({
-        url: "/register",
+        url: "/users/register",
         method: "POST",
         body: payload,
       }),
     }),
     loginApi: build.mutation({
       query: (payload) => ({
-        url: "/login",
+        url: "/users/login",
         method: "POST",
         body: payload,
       }),

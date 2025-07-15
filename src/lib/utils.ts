@@ -1,6 +1,10 @@
-
 import { toast } from "sonner";
+import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx"
 
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
 
 
 
@@ -25,4 +29,3 @@ export async function uploadToImgbb(image: File): Promise<string> {
 
   return imageData.data.url;
 }
-

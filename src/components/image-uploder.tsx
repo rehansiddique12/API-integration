@@ -4,7 +4,7 @@ import {
   type Dispatch,
   type SetStateAction,
 } from "react";
-import { uploadToImgbb } from "../lib/utlis";
+import { uploadToImgbb } from "../lib/utils";
 
 interface ImageUploaderProps {
   image: string;
@@ -14,9 +14,7 @@ interface ImageUploaderProps {
 const Imageuploder = ({ image, setImage }: ImageUploaderProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleClearImage = () => {
-    setImage("");
-  };
+  
 
   const handleonClick = () => {
     if (inputRef.current) {
@@ -34,30 +32,24 @@ const Imageuploder = ({ image, setImage }: ImageUploaderProps) => {
   };
   return (
     <div>
-      <p className="mb-2 font-bold text-xl">Select Your Profile Picture</p>
+      <p className="mb-2 font-bold text-sm text-[#e5e5e5]">Select Your Profile Picture</p>
       <div onClick={handleonClick}>
         {image ? (
-          <div className="border-2 border-indigo-600 border-dashed p-10 flex flex-col items-center gap-5 cursor-pointer">
-            <button
-              onClick={handleClearImage}
-              className="flex items-end justify-end w-full"
-            >
-              X
-            </button>
+          <div className="border-2 border-[#424242] rounded-xl border-dashed p-6 flex flex-col items-center gap-5 cursor-pointer bg-white/5">
 
             <img src={image} alt="" className="h-32" />
           </div>
         ) : (
-          <div className="border-2 border-indigo-600 border-dashed p-10 flex flex-col items-center gap-5 cursor-pointer">
-            <span className="font-semibold text-lg text-indigo-600">
+          <div className="border-2 border-[#424242] rounded-xl border-dashed p-6 flex flex-col items-center gap-5 cursor-pointer bg-white/5">
+            <span className="font-semibold text-lg text-[#e5e5e5]">
               Drag & Drop
             </span>
-            <fieldset className="flex w-full items-center justify-center border-t text-indigo-600">
-              <legend className="px-5 text-center font-light text-sm text-indigo-600">
+            <fieldset className="flex w-full items-center justify-center border-t border-[#424242]">
+              <legend className="px-5 text-center font-light text-sm text-[#e5e5e5]">
                 or
               </legend>
             </fieldset>
-            <span className="font-semibold text-lg text-indigo-600">
+            <span className="font-semibold text-lg text-[#e5e5e5]">
               Click to Upload an Image
             </span>
           </div>

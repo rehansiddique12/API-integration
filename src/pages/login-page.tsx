@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, Toaster } from "sonner";
-import { useLoginApiMutation } from "../store/services/user";
+import { useLoginApiMutation } from "../store/services/auth";
 import { LuLoader } from "react-icons/lu";
+import { setToken } from "../store/slices/global";
+import { useDispatch } from "react-redux";
+import { Separator } from "@/components/ui/separator";
+import { Input } from "@/components/ui/input";
+import { FaTelegramPlane } from "react-icons/fa";
 
 const Loginpage = () => {
   const navigate = useNavigate();
-  const [Login, {isLoading}] = useLoginApiMutation();
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [Login, { isLoading }] = useLoginApiMutation();
 
   const handleSubmit = async () => {
     const payload = {
@@ -28,63 +34,87 @@ const Loginpage = () => {
     setEmail("");
   };
 
+  useEffect(() => {
+    dispatch(setToken(null));
+    localStorage.clear();
+    console.log("Token after remove:", localStorage.getItem("token"));
+  }, []);
+
   return (
-    <div className="bg-gradient-to-r from-[#1a5193] to-indigo-500 h-screen">
+    <div className="bg-black h-screen">
       <Toaster position="top-right" richColors />
       <div className=" h-full flex flex-col items-center justify-center gap-5">
-        <p className="text-3xl font-bold text-white">LOGIN FORM</p>
-        <div className="w-1/2">
+        <div className="w-[450px]">
           <form
             onSubmit={(e) => {
               e.preventDefault();
               handleSubmit();
             }}
-            className="bg-white rounded-xl flex flex-col p-10 w-full border-l-8 border-indigo-600 duration-500 hover:shadow-xl"
+            className="bg-[#181818] rounded-xl flex flex-col px-5 py-2 w-full border-2 border-[#2b2b2b]"
           >
-            <label htmlFor="" className="mb-2 font-bold text-xl">
-              Email:
-            </label>
-            <input
-              type="email"
-              placeholder="Enter Your Email"
-              className="bg-black/20 p-2 rounded-xl outline-none px-5 focus:border focus:border-indigo-600"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <label htmlFor="" className="mb-2 font-bold text-xl mt-4">
-              Password:
-            </label>
-            <input
-              type="password"
-              placeholder="Enter Your Password"
-              className="bg-black/20 p-2 rounded-xl outline-none px-5 focus:border focus:border-indigo-600"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <div className="flex justify-end gap-3 w-full mt-10">
-              <button
-              disabled={isLoading}
-                type="submit"
-                className="bg-gradient-to-r px-8 py-2 w-full rounded-lg cursor-pointer text-white font-bold from-[#1a5193] to-indigo-500"
-              >
-                 {isLoading ?
-                  <LuLoader size={20} color="#FFFFFF" className="animate-spin" />
-                  :
-                  "Login"
-                  }
-              </button>
+            <div>
+              <p className="text-xl font-bold text-white mt-4">LOGIN</p>
+              <p className="font-bold text-sm text-[#8d8d8d]">
+                Enter your details to get started.
+              </p>
+              <Separator className="my-4" />
             </div>
-            <p className="text-end mt-4 mr-2">
-              Don't have an account?
-              <Link
-                to={"/register"}
-                className="underline underline-offset-4 text-indigo-500 font-bold text-lg"
+            <div className="flex flex-col w-full text-sm">
+              <label htmlFor="" className="mb-2 font-bold text-[#e5e5e5]">
+                Email:
+              </label>
+              <Input
+                type="email"
+                placeholder="Enter Your Email"
+                className="bg-white/5 "
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="flex flex-col w-full text-sm">
+              <label htmlFor="" className="mb-2 mt-3 font-bold text-[#e5e5e5]">
+                Password:
+              </label>
+              <Input
+                type="password"
+                placeholder="Enter Your Password"
+                className="bg-white/5 "
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <div className="flex flex-col gap-3 mt-2">
+              <button
+                disabled={isLoading}
+                type="submit"
+                className="flex items-center justify-center gap-2 bg-[#e5e5e5] px-8 py-2 w-full rounded-lg cursor-pointer font-bold mt-3"
               >
-                SignUp
-              </Link>
-            </p>
+                {isLoading ? (
+                  <LuLoader
+                    size={20}
+                    color="#FFFFFF"
+                    className="animate-spin"
+                  />
+                ) : (
+                  <div className="flex justify-center items-center gap-2">
+                    <FaTelegramPlane />
+                    Login
+                  </div>
+                )}
+              </button>
+
+              <p className="text-center mb-2 text-[#e5e5e5] text-[12px]">
+                Don't have an account?
+                <Link
+                  to={"/register"}
+                  className="underline underline-offset-4 text-[#e5e5e5] font-bold text-sm ml-1"
+                >
+                  SignUp
+                </Link>
+              </p>
+            </div>
           </form>
         </div>
       </div>

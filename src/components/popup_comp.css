@@ -1,0 +1,26 @@
+.slide-up {
+  animation: slideUp 1.5s cubic-bezier(0.10, 1, 0.10, 1);
+}
+.slide-down {
+  animation: slideDown 1.5s cubic-bezier(0.5, 2, 0.3, 2);
+}
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slideDown {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+} 

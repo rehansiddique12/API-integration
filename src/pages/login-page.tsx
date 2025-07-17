@@ -50,7 +50,7 @@ const Loginpage = () => {
               e.preventDefault();
               handleSubmit();
             }}
-            className="bg-[#181818] rounded-xl flex flex-col px-5 py-2 w-full border-2 border-[#2b2b2b]"
+            className="bg-[#181818] rounded-xl flex flex-col px-5 py-2 w-full border-2 border-[#2b2b2b] text-white"
           >
             <div>
               <p className="text-xl font-bold text-white mt-4">LOGIN</p>
@@ -94,11 +94,11 @@ const Loginpage = () => {
                 {isLoading ? (
                   <LuLoader
                     size={20}
-                    color="#FFFFFF"
+                    color="#000"
                     className="animate-spin"
                   />
                 ) : (
-                  <div className="flex justify-center items-center gap-2">
+                  <div className="flex justify-center items-center gap-2 text-black">
                     <FaTelegramPlane />
                     Login
                   </div>

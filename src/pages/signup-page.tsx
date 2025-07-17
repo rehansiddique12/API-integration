@@ -60,7 +60,7 @@ const SignupPage = () => {
             }}
             className="bg-[#181818] rounded-xl flex flex-col px-5 py-2 w-full h-[750px] border-2 border-[#2b2b2b] gap-5"
           >
-            <div>
+            <div className="text-white">
               <div>
                 <p className="text-xl font-bold text-white mt-4">REGISTER</p>
                 <p className="font-bold text-sm text-[#8d8d8d]">
@@ -143,7 +143,7 @@ const SignupPage = () => {
                   {isLoading ? (
                     <LuLoader size={20} color="#000" className="animate-spin" />
                   ) : (
-                    <div className="flex justify-center items-center gap-2">
+                    <div className="flex justify-center items-center gap-2 text-black">
                       <FaTelegramPlane />
                       Register
                     </div>

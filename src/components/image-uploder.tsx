@@ -32,7 +32,7 @@ const Imageuploder = ({ image, setImage }: ImageUploaderProps) => {
   };
   return (
     <div>
-      <p className="mb-2 font-bold text-sm text-[#e5e5e5]">Select Your Profile Picture</p>
+      <p className="mb-2 mt-4 font-bold text-sm text-[#e5e5e5]">Select Your Profile Picture :</p>
       <div onClick={handleonClick}>
         {image ? (
           <div className="border-2 border-[#424242] rounded-xl border-dashed p-6 flex flex-col items-center gap-5 cursor-pointer bg-white/5">

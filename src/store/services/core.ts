@@ -37,7 +37,6 @@ export const api = createApi({
   baseQuery: baseQueryWith401Handling,
   keepUnusedDataFor: 5,
   tagTypes: [
-    "Auth",
     "Items"
   ],
 

@@ -124,13 +124,13 @@ const Dashboard = () => {
       </MaxWidthWrapper>
 
     
-      {showPopup && selectedItem && (
+      {showPopup && (
         <Popupcomp
           onClose={() => {
             setShowPopup(false);
             setSelectedITem(undefined);
           }}
-          editData={selectedItem}
+          editData={selectedItem ?? {} as Items}
         />
       )}
 

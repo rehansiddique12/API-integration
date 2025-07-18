@@ -69,13 +69,13 @@ const Navbarcomp = () => {
         </div>
       </MaxWidthWrapper>
       <Separator className="" />
-      {showPopup && selectedItem && (
+      {showPopup && (
         <Popupcomp
           onClose={() => {
             setShowPopup(false);
             setSelectedITem(undefined);
           }}
-          editData={selectedItem}
+          editData={selectedItem ?? {} as Items}
         />
       )}
     </div>

@@ -23,7 +23,7 @@ const Navbarcomp = () => {
     setShowPopup(true);
   };
   
-  const [selectedItem, setSelectedITem] = useState<Items>();
+  
   const [showPopup, setShowPopup] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate(); 
@@ -73,9 +73,7 @@ const Navbarcomp = () => {
         <Popupcomp
           onClose={() => {
             setShowPopup(false);
-            setSelectedITem(undefined);
           }}
-          editData={selectedItem ?? {} as Items}
         />
       )}
     </div>

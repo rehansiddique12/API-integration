@@ -1,14 +1,12 @@
 import { useState } from "react";
-import { FaPlus } from "react-icons/fa6";
 import { FiEdit } from "react-icons/fi";
-import { RiDeleteBin7Line } from "react-icons/ri";
-import { TbDotsVertical } from "react-icons/tb";
-
-import Navbarcomp from "@/components/navbar_comp";
+import { FaPlus } from "react-icons/fa6";
 import Popupcomp from "@/components/popup_comp";
-import { useDeleteItemMutation, useGetItemsQuery } from "@/store/services/crud";
-
 import { Button } from "@/components/ui/button";
+import { TbDotsVertical } from "react-icons/tb";
+import { LuTriangleAlert } from "react-icons/lu";
+import Navbarcomp from "@/components/navbar_comp";
+import { RiDeleteBin7Line } from "react-icons/ri";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -16,7 +14,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import MaxWidthWrapper from "@/components/max-width-wrapper";
-import { LuTriangleAlert } from "react-icons/lu";
+import { useDeleteItemMutation, useGetItemsQuery } from "@/store/services/crud";
 
 const Dashboard = () => {
   const { data } = useGetItemsQuery();
@@ -123,14 +121,13 @@ const Dashboard = () => {
         </div>
       </MaxWidthWrapper>
 
-    
       {showPopup && (
         <Popupcomp
           onClose={() => {
             setShowPopup(false);
             setSelectedITem(undefined);
           }}
-          editData={selectedItem ?? {} as Items}
+          editData={selectedItem}
         />
       )}
 
@@ -138,7 +135,7 @@ const Dashboard = () => {
         <div className="fixed inset-0 bg-black/60 z-50 flex justify-center items-center">
           <div className="bg-black p-9 rounded-xl text-white w-full max-w-sm shadow-xl flex flex-col items-center justify-center border border-[#424242]">
             <div className="bg-[#3b1c1d] p-3 mb-4 rounded-full flex items-center justify-center">
-            <LuTriangleAlert className="size-16 text-red-600" />
+              <LuTriangleAlert className="size-16 text-red-600" />
             </div>
             <h2 className="text-xl font-semibold mb-4">Are you sure?</h2>
             <p className="mb-6 text-center">
@@ -146,7 +143,8 @@ const Dashboard = () => {
               undone.
             </p>
             <div className="flex justify-end gap-4">
-              <Button className="text-black cursor-pointer"
+              <Button
+                className="text-black cursor-pointer"
                 variant="outline"
                 onClick={() => {
                   setShowDeletePopup(false);
@@ -155,7 +153,11 @@ const Dashboard = () => {
               >
                 Close
               </Button>
-              <Button variant="destructive" onClick={confirmDelete} className="cursor-pointer">
+              <Button
+                variant="destructive"
+                onClick={confirmDelete}
+                className="cursor-pointer"
+              >
                 Sure
               </Button>
             </div>

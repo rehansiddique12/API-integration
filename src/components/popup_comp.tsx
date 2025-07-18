@@ -14,7 +14,7 @@ import { LuLoader } from "react-icons/lu";
 
 interface PopupcompProps {
   onClose: () => void;
-  editData: Items;
+  editData?: Items;
 }
 
 const Popupcomp = ({ onClose, editData }: PopupcompProps) => {

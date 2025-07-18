@@ -92,7 +92,7 @@ const Popupcomp = ({ onClose, editData }: PopupcompProps) => {
     <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[70] flex items-center justify-center">
       <Toaster position="top-right" richColors />
 
-      <div className="w-[450px] slide-up">
+      <div className="w-[400px] md:w-[450px] slide-up">
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -152,7 +152,7 @@ const Popupcomp = ({ onClose, editData }: PopupcompProps) => {
             </button>
             <button
               type="submit"
-              className="bg-[#e5e5e5] text-black px-6 py-2 rounded-lg w-full font-bold"
+              className="bg-[#e5e5e5] text-black px-6 py-2 rounded-lg w-full font-bold cursor-pointer flex items-center justify-center"
             >
               {isLoading || isEditing ? (
                 <LuLoader size={20} color="#000" className="animate-spin" />

@@ -47,17 +47,17 @@ const Dashboard = () => {
       <Navbarcomp />
       <MaxWidthWrapper>
         <div className="flex justify-center items-center">
-          <div className="py-6 grid lg:grid-cols-4 md:grid-cols-2 gap-5">
+          <div className="py-5 grid lg:grid-cols-4 md:grid-cols-2 gap-5">
             {data?.length ? (
               data.map((item) => (
                 <div
                   key={item.id}
-                  className="relative w-76 h-94 rounded-xl overflow-hidden flex flex-col group"
+                  className="relative w-76 h-94 rounded-xl overflow-hidden flex flex-col group "
                 >
                   <img
                     src={item.image_url}
                     alt={item.name}
-                    className="w-full h-full object-cover"
+                    className="w-full aspect-square"
                   />
                   <div className="absolute inset-0 flex flex-col justify-between">
                     <div className="flex justify-end p-2 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300">
@@ -94,7 +94,7 @@ const Dashboard = () => {
                         </DropdownMenuContent>
                       </DropdownMenu>
                     </div>
-                    <div className="bg-[#262626]/90 text-white px-4 py-4 rounded-b-xl">
+                    <div className="bg-[#262626] text-white px-4 py-4 rounded-b-xl">
                       <div>
                         <p className="font-bold text-xl line-clamp-2">
                           {item.name}

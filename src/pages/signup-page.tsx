@@ -10,6 +10,8 @@ import { useDispatch } from "react-redux";
 import { setToken } from "../store/slices/global";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { FaRegEyeSlash } from "react-icons/fa";
 
 const SignupPage = () => {
   const navigate = useNavigate();
@@ -47,6 +49,9 @@ const SignupPage = () => {
     localStorage.clear();
     // console.log("Token after remove:", localStorage.getItem("token"));
   }, []);
+
+  // password state
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div className="bg-black h-screen">
@@ -121,14 +126,26 @@ const SignupPage = () => {
                 >
                   Password:
                 </label>
-                <Input
-                  type="password"
-                  placeholder="Enter Your Password"
-                  className="bg-white/5"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
+                <div className="relative w-full">
+                  <Input
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Enter Your Password"
+                    className="bg-white/5 pr-10"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                  <span
+                    className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-gray-400"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? (
+                      <MdOutlineRemoveRedEye className="w-5 h-5" />
+                    ) : (
+                      <FaRegEyeSlash className="w-5 h-5" />
+                    )}
+                  </span>
+                </div>
               </div>
             </div>
             <div className="">
@@ -168,7 +185,3 @@ const SignupPage = () => {
 };
 
 export default SignupPage;
-
-
-
-

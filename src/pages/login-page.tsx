@@ -8,12 +8,15 @@ import { useDispatch } from "react-redux";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { FaTelegramPlane } from "react-icons/fa";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { FaRegEyeSlash } from "react-icons/fa6";
 
 const Loginpage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [Login, { isLoading }] = useLoginApiMutation();
 
   const handleSubmit = async () => {
@@ -76,14 +79,26 @@ const Loginpage = () => {
               <label htmlFor="" className="mb-2 mt-3 font-bold text-[#e5e5e5]">
                 Password:
               </label>
-              <Input
-                type="password"
-                placeholder="Enter Your Password"
-                className="bg-white/5 "
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
+              <div className="relative w-full">
+                <Input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter Your Password"
+                  className="bg-white/5 pr-10"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <span
+                  className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-gray-400"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? (
+                    <MdOutlineRemoveRedEye className="w-5 h-5" />
+                  ) : (
+                    <FaRegEyeSlash className="w-5 h-5" />
+                  )}
+                </span>
+              </div>
             </div>
             <div className="flex flex-col gap-3 mt-2">
               <button
@@ -92,11 +107,7 @@ const Loginpage = () => {
                 className="flex items-center justify-center gap-2 bg-[#e5e5e5] px-8 py-2 w-full rounded-lg cursor-pointer font-bold mt-3"
               >
                 {isLoading ? (
-                  <LuLoader
-                    size={20}
-                    color="#000"
-                    className="animate-spin"
-                  />
+                  <LuLoader size={20} color="#000" className="animate-spin" />
                 ) : (
                   <div className="flex justify-center items-center gap-2 text-black">
                     <FaTelegramPlane />

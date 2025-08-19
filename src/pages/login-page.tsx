@@ -1,19 +1,26 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { toast, Toaster } from "sonner";
-import { useLoginApiMutation } from "../store/services/auth";
-import { LuLoader } from "react-icons/lu";
-import { setToken } from "../store/slices/global";
+import { FcGoogle } from "react-icons/fc";
 import { useDispatch } from "react-redux";
-import { Separator } from "@/components/ui/separator";
-import { Input } from "@/components/ui/input";
-import { FaTelegramPlane } from "react-icons/fa";
-import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { LuLoader } from "react-icons/lu";
+import { useEffect, useState } from "react";
+import { Input } from "../components/ui/input";
 import { FaRegEyeSlash } from "react-icons/fa6";
+import { FaTelegramPlane } from "react-icons/fa";
+import { setToken } from "../store/slices/global";
+import firebase from "../assets/image/firebase.png";
+import { Link, useNavigate } from "react-router-dom";
+import { Separator } from "../components/ui/separator";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
+import { useLoginApiMutation } from "../store/services/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { app } from "../firebase";
 
 const Loginpage = () => {
+  const auth = getAuth(app);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const provider = new GoogleAuthProvider();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -43,6 +50,16 @@ const Loginpage = () => {
     console.log("Token after remove:", localStorage.getItem("token"));
   }, []);
 
+  const { login } = useKindeAuth();
+
+  const handleGoogleLogin = async () => {
+    try {
+      await signInWithPopup(auth, provider);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="bg-black h-screen">
       <Toaster position="top-right" richColors />
@@ -61,6 +78,29 @@ const Loginpage = () => {
                 Enter your details to get started.
               </p>
               <Separator className="my-4" />
+            </div>
+            <div className="pb-3 gap-5 flex justify-center">
+              <button
+                onClick={() =>
+                  login({
+                    connectionId: "conn_0198bd2c9c099c26a45f2cbb6d89f65b",
+                  })
+                }
+                type="button"
+                className="px-4 p-2 text-white rounded-md bg-white/10 cursor-pointer flex justify-center items-center gap-2 hover:bg-white/20"
+              >
+                <FcGoogle />
+                Login With Google
+              </button>
+
+              <button
+                onClick={() => handleGoogleLogin()}
+                type="button"
+                className="px-4 p-2 text-white rounded-md bg-white/10 cursor-pointer flex justify-center items-center gap-2 hover:bg-white/20"
+              >
+                <img src={firebase} alt="" className="h-5" />
+                Login With FireBase
+              </button>
             </div>
             <div className="flex flex-col w-full text-sm">
               <label htmlFor="" className="mb-2 font-bold text-[#e5e5e5]">

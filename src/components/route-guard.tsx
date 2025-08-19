@@ -1,16 +1,24 @@
-import { useSelector } from "react-redux";
-import { Navigate, Outlet } from "react-router";
+import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
+import { Loader2 } from "lucide-react";
+import { type ReactNode } from "react";
+import { Navigate } from "react-router-dom";
 
-import type { RootState } from "../store";
+const RouteGuard = ({ children }: { children: ReactNode }) => {
+  const { isAuthenticated, isLoading } = useKindeAuth();
 
-const RouteGuard = () => {
-  const { token } = useSelector((state: RootState) => state.global);
-
-  if (!token) {
-    return <Navigate to="/" replace />;
+  if (isLoading) {
+    return (
+      <div className="flex h-screen w-full items-center justify-center overflow-hidden bg-background">
+        <Loader2 className="size-16 animate-spin text-primary" />
+      </div>
+    );
   }
 
-  return <Outlet />;
+  if (!isAuthenticated) {
+    return <Navigate to="/Login" replace />;
+  }
+
+  return children;
 };
 
 export default RouteGuard;

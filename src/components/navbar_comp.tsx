@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import type { RootState } from "../store";
 import logo from "../assets/image/react.png";
 import { Separator } from "./ui/separator";
@@ -11,11 +11,10 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { setToken } from "@/store/slices/global";
-import { useNavigate } from "react-router-dom";
 import { FaPlus } from "react-icons/fa6";
 import Popupcomp from "./popup_comp";
 import { useState } from "react";
+import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 
 const Navbarcomp = () => {
   const handleShowPopup = () => {
@@ -23,14 +22,9 @@ const Navbarcomp = () => {
   };
 
   const [showPopup, setShowPopup] = useState(false);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
-  const handleLogout = () => {
-    dispatch(setToken(null));
-    localStorage.clear();
-    navigate("/login");
-  };
+  const { logout } = useKindeAuth();
+  
   const { userdata } = useSelector((state: RootState) => state.global);
   return (
     <div className="">
@@ -67,7 +61,7 @@ const Navbarcomp = () => {
                 </DropdownMenuCheckboxItem>
                 <DropdownMenuCheckboxItem
                   className="text-white hover:text-red-400 cursor-pointer"
-                  onClick={handleLogout}
+                  onClick={() => logout()}
                 >
                   <CiLogout className="text-red-400" />
                   Logout

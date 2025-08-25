@@ -1,28 +1,26 @@
+import DashboardLayout from "./components/layout/dashboard-layout";
 import RouteGuard from "./components/route-guard";
-import Dashbord from "./pages/dashbord";
+import Dashboard from "./pages/dashbord";
 import Loginpage from "./pages/login-page";
 import SignupPage from "./pages/signup-page";
-import {Navigate, Route, Routes } from "react-router-dom";
-
-
+import { Route, Routes } from "react-router-dom";
 
 const App = () => {
   return (
     <Routes>
+      <Route path="/register" element={<SignupPage />} />
+      <Route path="/" element={<Loginpage />} />
       <Route
         element={
           <RouteGuard>
-            <Dashbord/>
+            <DashboardLayout />
           </RouteGuard>
         }
-      ></Route>
-      <Route path="/" element={<Navigate to="/Login" replace />} />
-      <Route path="/register" element={<SignupPage />} />
-      <Route path="/login" element={<Loginpage />} />
-      <Route path="/dashboard" element={<Dashbord/>} />
-      
+      >
+      <Route path="/dashboard" element={<Dashboard />} />
+      </Route>
     </Routes>
-  )
-}
+  );
+};
 
-export default App
+export default App;

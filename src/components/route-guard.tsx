@@ -15,7 +15,7 @@ const RouteGuard = ({ children }: { children: ReactNode }) => {
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/Login" replace />;
+    return <Navigate to="/" replace />;
   }
 
   return children;

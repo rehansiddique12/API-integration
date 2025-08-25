@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { FaRegEyeSlash } from "react-icons/fa";
+import { ModeToggle } from "@/components/mode-toggle";
 
 const SignupPage = () => {
   const navigate = useNavigate();
@@ -48,33 +49,36 @@ const SignupPage = () => {
     dispatch(setToken(null));
     localStorage.clear();
     // console.log("Token after remove:", localStorage.getItem("token"));
-  }, []);
+  },);
 
   // password state
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="bg-black h-screen">
+    <div className="h-screen w-full">
       <Toaster position="top-right" richColors />
-      <div className=" h-full flex flex-col items-center justify-center">
-        <div className="w-[450px] flex items-center justify-center">
+      <div className="absolute top-5 right-5">
+          <ModeToggle />
+        </div>
+      <div className=" h-full flex flex-col items-center justify-center ">
+        <div className="w-[450px] flex items-center justify-center ">
           <form
             onSubmit={(e) => {
               e.preventDefault();
               handleSubmit();
             }}
-            className="bg-[#181818] rounded-xl flex flex-col px-5 py-2 w-full h-[750px] border-2 border-[#2b2b2b] gap-5"
+            className="rounded-xl flex flex-col px-5 py-2 w-full h-[750px] border-2 gap-5"
           >
-            <div className="text-white">
+            <div className="text-primary">
               <div>
-                <p className="text-xl font-bold text-white mt-4">REGISTER</p>
-                <p className="font-bold text-sm text-[#8d8d8d]">
+                <p className="text-xl font-bold text-primary mt-4">REGISTER</p>
+                <p className="font-bold text-sm text-primary">
                   Enter your details to get started.
                 </p>
                 <Separator className="my-4" />
               </div>
               <div className="flex flex-col w-full text-sm">
-                <label htmlFor="" className="mb-2 font-bold text-[#e5e5e5]">
+                <label htmlFor="" className="mb-2 font-bold text-primary">
                   First_Name:
                 </label>
                 <Input
@@ -89,7 +93,7 @@ const SignupPage = () => {
               <div className="flex flex-col w-full text-sm">
                 <label
                   htmlFor=""
-                  className="mb-2 mt-4 font-bold text-[#e5e5e5]"
+                  className="mb-2 mt-4 font-bold text-primary"
                 >
                   Last_Name:
                 </label>
@@ -106,7 +110,7 @@ const SignupPage = () => {
               <div className="flex flex-col w-full text-sm">
                 <label
                   htmlFor=""
-                  className="mb-2 mt-4 font-bold text-[#e5e5e5]"
+                  className="mb-2 mt-4 font-bold text-primary"
                 >
                   Email:
                 </label>
@@ -122,7 +126,7 @@ const SignupPage = () => {
               <div className="flex flex-col w-full text-sm">
                 <label
                   htmlFor=""
-                  className="mb-2 mt-4 font-bold text-[#e5e5e5]"
+                  className="mb-2 mt-4 font-bold text-primary"
                 >
                   Password:
                 </label>
@@ -136,7 +140,7 @@ const SignupPage = () => {
                     required
                   />
                   <span
-                    className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-gray-400"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-primary"
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? (
@@ -167,11 +171,11 @@ const SignupPage = () => {
                   )}
                 </button>
               </div>
-              <p className="text-center mt-4 text-[#e5e5e5] text-[12px]">
+              <p className="text-center mt-4 text-primary text-[12px]">
                 Already have an account?
                 <Link
-                  to={"/login"}
-                  className="underline underline-offset-4 text-[#e5e5e5] font-bold text-sm ml-1"
+                  to={"/"}
+                  className="underline underline-offset-4 text-primary font-bold text-sm ml-1"
                 >
                   Login
                 </Link>

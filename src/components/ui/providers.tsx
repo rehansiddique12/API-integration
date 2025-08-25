@@ -4,6 +4,9 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import store, { persistor } from "../../store";
+import { ThemeProvider } from "../theme-provider";
+import { SidebarProvider } from "./sidebar";
+import { Toaster } from "sonner";
 
 interface ProvidersProps {
   children?: ReactNode;
@@ -19,7 +22,14 @@ const Providers = ({ children }: ProvidersProps) => {
     >
       <Provider store={store}>
         <PersistGate persistor={persistor}>
-          <BrowserRouter>{children}</BrowserRouter>
+          <BrowserRouter>
+            <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+              <SidebarProvider>
+                <Toaster richColors={true} duration={1500} />
+                {children}
+              </SidebarProvider>
+            </ThemeProvider>
+          </BrowserRouter>
         </PersistGate>
       </Provider>
     </KindeProvider>

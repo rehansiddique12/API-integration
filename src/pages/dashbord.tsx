@@ -5,7 +5,7 @@ import Popupcomp from "@/components/popup_comp";
 import { Button } from "@/components/ui/button";
 import { TbDotsVertical } from "react-icons/tb";
 import { LuTriangleAlert } from "react-icons/lu";
-import Navbarcomp from "@/components/navbar_comp";
+
 import { RiDeleteBin7Line } from "react-icons/ri";
 import {
   DropdownMenu,
@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import MaxWidthWrapper from "@/components/max-width-wrapper";
 import { useDeleteItemMutation, useGetItemsQuery } from "@/store/services/crud";
+import { Loader2 } from "lucide-react";
 
 const Dashboard = () => {
   const { data } = useGetItemsQuery();
@@ -43,11 +44,10 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="bg-black min-h-screen relative text-white">
-      <Navbarcomp />
+    <div className="min-h-screen h-full relative text-white w-full">
       <MaxWidthWrapper>
-        <div className="flex justify-center items-center">
-          <div className="py-5 grid lg:grid-cols-4 md:grid-cols-2 gap-5">
+        <div className="flex justify-center items-center w-full">
+          <div className="py-5 grid lg:grid-cols-4 md:grid-cols-2 gap-5 h-full items-center justify-center">
             {data?.length ? (
               data.map((item) => (
                 <div
@@ -108,15 +108,18 @@ const Dashboard = () => {
                 </div>
               ))
             ) : (
-              <p className="text-gray-500 mt-10">Data is Loading . . .</p>
+              <p className="text-gray-500 flex items-center justify-center h-full w-full">
+                <Loader2 className="animate-spin size-10" /></p>
             )}
 
-            <div
-              className="hidden lg:flex border-2 border-[#424242] rounded-xl border-dashed p-6 items-center gap-5 cursor-pointer bg-white/5 w-72 h-94 hover:bg-white/10 justify-center transition"
-              onClick={handleShowPopup}
-            >
-              <FaPlus size={60} />
-            </div>
+            
+              <div
+                className="hidden lg:flex border-2 border-[#424242] rounded-xl border-dashed p-6 items-center gap-5 cursor-pointer bg-primary/10 w-72 h-94 hover:bg-primary/20 justify-center transition"
+                onClick={handleShowPopup}
+              >
+                <FaPlus className="size-16" />
+              </div>
+           
           </div>
         </div>
       </MaxWidthWrapper>

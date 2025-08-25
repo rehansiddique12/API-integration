@@ -32,7 +32,7 @@ const Imageuploder = ({ image, setImage }: ImageUploaderProps) => {
   };
   return (
     <div>
-      <p className="mb-2 mt-4 font-bold text-sm text-[#e5e5e5]">Select Your Profile Picture :</p>
+      <p className="mb-2 mt-4 font-bold text-sm text-primary">Select Your Profile Picture :</p>
       <div onClick={handleonClick}>
         {image ? (
           <div className="border-2 border-[#424242] rounded-xl border-dashed p-6 flex flex-col items-center gap-5 cursor-pointer bg-white/5">
@@ -41,15 +41,15 @@ const Imageuploder = ({ image, setImage }: ImageUploaderProps) => {
           </div>
         ) : (
           <div className="border-2 border-[#424242] rounded-xl border-dashed p-6 flex flex-col items-center gap-5 cursor-pointer bg-white/5">
-            <span className="font-semibold text-lg text-[#e5e5e5]">
+            <span className="font-semibold text-lg text-primary">
               Drag & Drop
             </span>
             <fieldset className="flex w-full items-center justify-center border-t border-[#424242]">
-              <legend className="px-5 text-center font-light text-sm text-[#e5e5e5]">
+              <legend className="px-5 text-center font-light text-sm text-primary">
                 or
               </legend>
             </fieldset>
-            <span className="font-semibold text-lg text-[#e5e5e5]">
+            <span className="font-semibold text-lg text-primary">
               Click to Upload an Image
             </span>
           </div>

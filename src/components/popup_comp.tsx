@@ -98,7 +98,7 @@ const Popupcomp = ({ onClose, editData }: PopupcompProps) => {
             e.preventDefault();
             handleSubmit();
           }}
-          className="bg-black border-2 border-[#2b2b2b] text-white rounded-xl px-5 py-4 flex flex-col"
+          className="border-2 border-[#2b2b2b] text-primary rounded-xl px-5 py-4 flex flex-col"
         >
           <div className="flex justify-end">
             <IoClose
@@ -109,14 +109,14 @@ const Popupcomp = ({ onClose, editData }: PopupcompProps) => {
 
           <div>
             <p className="text-xl font-bold">Add an Item</p>
-            <p className="text-sm text-[#8d8d8d] font-medium">
+            <p className="text-sm text-primary font-medium">
               Add your favorite items here.
             </p>
             <Separator className="my-4" />
           </div>
 
           <div className="flex flex-col text-sm">
-            <label className="mb-1 font-bold text-[#e5e5e5]">Item Name:</label>
+            <label className="mb-1 font-bold text-primary">Item Name:</label>
             <Input
               type="text"
               placeholder="Enter item name"
@@ -127,12 +127,12 @@ const Popupcomp = ({ onClose, editData }: PopupcompProps) => {
           </div>
 
           <div className="flex flex-col text-sm mt-4">
-            <label className="mb-2 font-bold text-[#e5e5e5]">
+            <label className="mb-2 font-bold text-primary">
               Item Description:
             </label>
             <Textarea
               placeholder="Enter item description"
-              className="bg-white/5 resize-none h-32"
+              className="resize-none h-32 text-primary"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               required
@@ -145,14 +145,14 @@ const Popupcomp = ({ onClose, editData }: PopupcompProps) => {
           <div className="flex justify-end gap-3 mt-4">
             <button
               type="button"
-              className="bg-white/20 text-white px-6 py-2 rounded-lg w-full"
+              className="border text-primary px-6 py-2 rounded-lg w-full"
               onClick={handleClose}
             >
               Close
             </button>
             <button
               type="submit"
-              className="bg-[#e5e5e5] text-black px-6 py-2 rounded-lg w-full font-bold cursor-pointer flex items-center justify-center"
+              className="border text-primary px-6 py-2 rounded-lg w-full font-bold cursor-pointer flex items-center justify-center"
             >
               {isLoading || isEditing ? (
                 <LuLoader size={20} color="#000" className="animate-spin" />

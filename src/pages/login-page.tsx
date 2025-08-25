@@ -15,6 +15,7 @@ import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { useLoginApiMutation } from "../store/services/auth";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { app } from "../firebase";
+import { ModeToggle } from "@/components/mode-toggle";
 
 const Loginpage = () => {
   const auth = getAuth(app);
@@ -47,8 +48,7 @@ const Loginpage = () => {
   useEffect(() => {
     dispatch(setToken(null));
     localStorage.clear();
-    console.log("Token after remove:", localStorage.getItem("token"));
-  }, []);
+  },);
 
   const { login } = useKindeAuth();
 
@@ -61,7 +61,10 @@ const Loginpage = () => {
   };
 
   return (
-    <div className="bg-black h-screen">
+    <div className="h-screen w-full">
+      <div className="absolute top-5 right-5">
+          <ModeToggle />
+        </div>
       <Toaster position="top-right" richColors />
       <div className=" h-full flex flex-col items-center justify-center gap-5">
         <div className="w-[450px]">
@@ -70,16 +73,16 @@ const Loginpage = () => {
               e.preventDefault();
               handleSubmit();
             }}
-            className="bg-[#181818] rounded-xl flex flex-col px-5 py-2 w-full border-2 border-[#2b2b2b] text-white"
+            className="bg rounded-xl flex flex-col px-5 py-2 w-full border-2 text-white"
           >
             <div>
-              <p className="text-xl font-bold text-white mt-4">LOGIN</p>
-              <p className="font-bold text-sm text-[#8d8d8d]">
+              <p className="text-xl font-bold text-primary mt-4">LOGIN</p>
+              <p className="font-bold text-sm text-primary">
                 Enter your details to get started.
               </p>
               <Separator className="my-4" />
             </div>
-            <div className="pb-3 gap-5 flex justify-center">
+            <div className="pb-3 gap-3 flex justify-center">
               <button
                 onClick={() =>
                   login({
@@ -87,7 +90,7 @@ const Loginpage = () => {
                   })
                 }
                 type="button"
-                className="px-4 p-2 text-white rounded-md bg-white/10 cursor-pointer flex justify-center items-center gap-2 hover:bg-white/20"
+                className="px-4 p-2 text-primary border border-gray-400 rounded-md bg-white/10 cursor-pointer flex justify-center items-center gap-2 hover:bg-white/20"
               >
                 <FcGoogle />
                 Login With Google
@@ -96,14 +99,14 @@ const Loginpage = () => {
               <button
                 onClick={() => handleGoogleLogin()}
                 type="button"
-                className="px-4 p-2 text-white rounded-md bg-white/10 cursor-pointer flex justify-center items-center gap-2 hover:bg-white/20"
+                className="px-4 p-2 text-primary border border-gray-400 rounded-md bg-white/10 cursor-pointer flex justify-center items-center gap-2 hover:bg-white/20"
               >
                 <img src={firebase} alt="" className="h-5" />
                 Login With FireBase
               </button>
             </div>
             <div className="flex flex-col w-full text-sm">
-              <label htmlFor="" className="mb-2 font-bold text-[#e5e5e5]">
+              <label htmlFor="" className="mb-2 font-bold text-primary">
                 Email:
               </label>
               <Input
@@ -116,7 +119,7 @@ const Loginpage = () => {
               />
             </div>
             <div className="flex flex-col w-full text-sm">
-              <label htmlFor="" className="mb-2 mt-3 font-bold text-[#e5e5e5]">
+              <label htmlFor="" className="mb-2 mt-3 font-bold text-primary">
                 Password:
               </label>
               <div className="relative w-full">
@@ -129,7 +132,7 @@ const Loginpage = () => {
                   required
                 />
                 <span
-                  className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-gray-400"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-primary"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
@@ -156,11 +159,11 @@ const Loginpage = () => {
                 )}
               </button>
 
-              <p className="text-center mb-2 text-[#e5e5e5] text-[12px]">
+              <p className="text-center mb-2 text-primary text-[12px]">
                 Don't have an account?
                 <Link
                   to={"/register"}
-                  className="underline underline-offset-4 text-[#e5e5e5] font-bold text-sm ml-1"
+                  className="underline underline-offset-4 text-primary font-bold text-sm ml-1"
                 >
                   SignUp
                 </Link>

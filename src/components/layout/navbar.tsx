@@ -1,7 +1,5 @@
 import { useSelector } from "react-redux";
-
 import { CiLogout } from "react-icons/ci";
-
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -16,6 +14,7 @@ import Popupcomp from "../popup_comp";
 import { Separator } from "@radix-ui/react-separator";
 import type { RootState } from "@/store";
 import { Button } from "../ui/button";
+import { SidebarTrigger } from "../ui/sidebar";
 
 const Navbar = () => {
   const handleShowPopup = () => {
@@ -26,46 +25,53 @@ const Navbar = () => {
 
   const { userdata } = useSelector((state: RootState) => state.global);
   return (
-    <div className="w-full px-7 shadow h-16 items-center justify-end flex">
-      <div className="flex items-center gap-3">
+    <div className="w-full items-center justify-end flex">
+      <div className="flex items-center gap-3 w-full">
         <Button
           variant={"default"}
           size={"icon"}
-          className="bg-white/20 p-1.5 rounded-xl  lg:hidden"
+          className="bg-white/20 p-1.5 rounded-xl lg:hidden"
           onClick={handleShowPopup}
         >
           <FaPlus size={20} className="text-primary" />
         </Button>
-
-        <div className="flex gap-2.5">
-          <ModeToggle />
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <img
-                src={userdata?.profile_picture || "https://ui.shadcn.com/avatars/04.png"}
-                alt="https://ui.shadcn.com/avatars/04.png"
-                className="h-8 w-8 rounded-full cursor-pointer"
-              />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="mt-2 -ml-17">
-              <DropdownMenuCheckboxItem>
-                <div>
-                  <p className="text-[14px] font-bold text-white">
-                    {userdata.first_name}
-                    {userdata.last_name}
-                  </p>
-                  <p className="text-[12px] text-gray-400">{userdata.email}</p>
-                </div>
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem
-                className="text-white hover:text-red-400 cursor-pointer"
-                onClick={() => logout()}
-              >
-                <CiLogout className="text-red-400" />
-                Logout
-              </DropdownMenuCheckboxItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+        <div className="flex h-14.5 w-full items-center justify-between border-b bg-sidebar px-5">
+          <SidebarTrigger />
+          <div className="flex gap-2.5">
+            <ModeToggle />
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <img
+                  src={
+                    userdata?.profile_picture ||
+                    "https://ui.shadcn.com/avatars/04.png"
+                  }
+                  alt="https://ui.shadcn.com/avatars/04.png"
+                  className="h-8 w-8 rounded-full cursor-pointer"
+                />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="mt-2 -ml-17">
+                <DropdownMenuCheckboxItem>
+                  <div>
+                    <p className="text-[14px] font-bold text-white">
+                      {userdata.first_name}
+                      {userdata.last_name}
+                    </p>
+                    <p className="text-[12px] text-gray-400">
+                      {userdata.email}
+                    </p>
+                  </div>
+                </DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem
+                  className="text-white hover:text-red-400 cursor-pointer"
+                  onClick={() => logout()}
+                >
+                  <CiLogout className="text-red-400" />
+                  Logout
+                </DropdownMenuCheckboxItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
       </div>
       <Separator className="" />

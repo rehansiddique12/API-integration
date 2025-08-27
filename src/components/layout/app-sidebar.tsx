@@ -1,13 +1,10 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
-
+import { items } from "@/lib/constant";
 import logo from "@/assets/image/react.png";
-
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -15,9 +12,10 @@ import {
   SidebarFooter,
 } from "@/components/ui/sidebar";
 import {
+  Separator,
   DropdownMenu,
-  DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
 
@@ -26,34 +24,6 @@ import type { RootState } from "@/store";
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { CiLogout } from "react-icons/ci";
 
-// Menu items.
-const items = [
-  {
-    title: "Home",
-    url: "#",
-    icon: Home,
-  },
-  {
-    title: "Inbox",
-    url: "#",
-    icon: Inbox,
-  },
-  {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar,
-  },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
-  },
-  {
-    title: "Settings",
-    url: "#",
-    icon: Settings,
-  },
-];
 export function AppSidebar() {
   const { logout } = useKindeAuth();
   const { userdata } = useSelector((state: RootState) => state.global);
@@ -62,9 +32,9 @@ export function AppSidebar() {
       <SidebarHeader>
         <img src={logo} alt="" className="size-10 cursor-pointer" />
       </SidebarHeader>
+      <Separator className="bg-primary/10 h-0.5" />
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
@@ -94,7 +64,7 @@ export function AppSidebar() {
                 className="h-8 w-8 rounded-full"
               />
               <p className="text-[14px] font-bold text-primary truncate max-w-[160px]">
-                {userdata?.last_name} <br />
+                {userdata?.first_name} {userdata?.last_name} <br />
                 <span className="text-xs font-normal text-gray-400">
                   {userdata?.email}
                 </span>
@@ -102,7 +72,10 @@ export function AppSidebar() {
             </div>
           </DropdownMenuTrigger>
 
-          <DropdownMenuContent side="top" className="w-[250px] p-2 mb-3 bg-primary/40 ">
+          <DropdownMenuContent
+            side="top"
+            className="w-[250px] p-2 mb-3 bg-primary/10 "
+          >
             <DropdownMenuItem
               className="text-destructive flex items-center gap-3 outline-none cursor-pointer"
               onClick={() => logout()}

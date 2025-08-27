@@ -1,7 +1,9 @@
 import DashboardLayout from "./components/layout/dashboard-layout";
 import RouteGuard from "./components/route-guard";
-import Dashboard from "./pages/dashbord";
+import Dashboard from "./pages/dashboard";
+
 import Loginpage from "./pages/login-page";
+import Products from "./pages/product";
 import SignupPage from "./pages/signup-page";
 import { Route, Routes } from "react-router-dom";
 
@@ -17,7 +19,8 @@ const App = () => {
           </RouteGuard>
         }
       >
-      <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Route>
     </Routes>
   );

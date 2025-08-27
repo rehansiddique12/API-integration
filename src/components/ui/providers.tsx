@@ -16,8 +16,8 @@ const Providers = ({ children }: ProvidersProps) => {
     <KindeProvider
       clientId="8214457559424564bb55e86f2e35a43c"
       domain="https://rehandev.kinde.com"
-      redirectUri="http://localhost:5173/dashboard"
-      logoutUri="http://localhost:5173"
+      redirectUri="https://redux-toolkit-react-ts.vercel.app/dashboard"
+      logoutUri="https://redux-toolkit-react-ts.vercel.app"
       useInsecureForRefreshToken={true}
     >
       <Provider store={store}>
